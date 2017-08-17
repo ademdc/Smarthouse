@@ -1,0 +1,34 @@
+import RPi.GPIO as GPIO
+GPIO.setmode(GPIO.BOARD)
+
+red_pin = 13
+green_pin = 15
+blue_pin = 16
+GPIO.setup(red_pin, GPIO.OUT)
+GPIO.setup(green_pin, GPIO.OUT)
+GPIO.setup(blue_pin, GPIO.OUT)
+GPIO.output(red_pin, False)
+GPIO.output(green_pin, False)
+GPIO.output(blue_pin, False)
+try:         
+    while True:
+	print ("Please input your colors.")
+        UserInput = raw_input()
+	UserInput = str(UserInput)
+        if UserInput == "red":
+            GPIO.output(red_pin, True)
+            GPIO.output(green_pin, False)
+            GPIO.output(blue_pin, False)
+        elif UserInput == "green":
+            GPIO.output(red_pin, False)
+            GPIO.output(green_pin, True)
+            GPIO.output(blue_pin, False)
+        elif UserInput == "blue":
+            GPIO.output(red_pin, False)
+            GPIO.output(green_pin, False)
+            GPIO.output(blue_pin, True)
+	else:
+		print("Only red, green, and blue are valid colors.")
+finally:  
+    print("Cleaning up.")
+    GPIO.cleanup()
