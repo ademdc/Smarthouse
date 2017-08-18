@@ -31,21 +31,35 @@ def temperature():
     monthdate = date.today();
     result = instance.read()
     test = result.temperature
-    if test==0:
-        test=25
+
     if test < 25:
 #	GPIO.setmode(GPIO.BOARD)
 	GPIO.setup(27,GPIO.OUT)
 	GPIO.output(27,1)
 	GPIO.setup(22,GPIO.OUT)
 	GPIO.output(22,0)
+	GPIO.setup(23,GPIO.OUT)
+	GPIO.output(23,0)
 	print "It's Cold"
-    if test >= 25:
+    
+    if test == 25:
 #	GPIO.setmode(GPIO.BOARD)
-	GPIO.setup(22,GPIO.OUT)
-	GPIO.output(22,1)
 	GPIO.setup(27,GPIO.OUT)
 	GPIO.output(27,0)
+	GPIO.setup(22,GPIO.OUT)
+	GPIO.output(22,1)
+	GPIO.setup(23,GPIO.OUT)
+	GPIO.output(23,0)
+	print "none"
+
+    if test > 25:
+#	GPIO.setmode(GPIO.BOARD)
+	GPIO.setup(27,GPIO.OUT)
+	GPIO.output(27,0)
+	GPIO.setup(22,GPIO.OUT)
+	GPIO.output(22,0)
+	GPIO.setup(23,GPIO.OUT)
+	GPIO.output(23,1)
 	print "It's Hot"
     return render_template("index.html",temp=test, weekday=weekday, monthdate=monthdate)
 
